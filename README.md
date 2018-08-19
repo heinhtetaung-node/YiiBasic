@@ -231,3 +231,32 @@ vendor/bin/codecept run functional,unit -- --coverage-html --coverage-xml
 ```
 
 You can see code coverage output under the `tests/_output` directory.
+
+
+
+
+
+##########################################################################################################
+
+
+Project create command
+composer create-project --prefer-dist yiisoft/yii2-app-basic basic
+
+
+Run command
+php yii serve --port=9000
+
+
+Migrate Command
+yii migrate/create create_item_table
+
+yii migrate
+
+
+
+Yii validation rules
+https://www.yiiframework.com/wiki/56/reference-model-rules-validation#validation-rules-reference
+
+Yii return redirect
+return $this->redirect(['item/index']);
+https://stackoverflow.com/questions/23893539/yii2-redirect-in-controller-action-does-not-work
