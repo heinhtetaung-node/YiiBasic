@@ -19,4 +19,11 @@ class Category extends ActiveRecord
     {
         return $this->hasMany(Item::className(), ['cat_id' => 'id']);
     }
+
+    public function rules()
+	{
+		return [
+			['cat_name', 'required']			
+		];
+	}
 }

@@ -280,6 +280,8 @@ http://www.bsourcecode.com/yiiframework2/yii2-0-display-dropdownlist/
 Yii2 getting fields from foreign key columns
 https://stackoverflow.com/questions/44406474/how-can-i-access-both-of-tablesfields-in-leftjoin-in-yii2
 
+Yii create crud without GII
+http://latcoding.com/2015/08/05/create-crud-in-yii2-without-gii/
 
 
 

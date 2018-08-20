@@ -32,15 +32,9 @@ class ItemController extends Controller
 
     public function actionCreate()
     {
-        $model = new ItemForm();
+        $item = new Item();
         $categories = Category::find()->orderBy('id')->all();
-        if($model->load(Yii::$app->request->post()) && $model->validate()){            
-            //var_dump(Yii::$app->request->post()); echo "<hr>"; var_dump($model); exit;
-            $item = new Item();
-            $item->item_name = $model->item_name;
-            $item->item_price = $model->item_price;
-            $item->item_description = $model->item_description;            
-            $item->cat_id = $model->cat_id;            
+        if($item->load(Yii::$app->request->post()) && $item->validate()){            
             $res = $item->save();
             if($res==1){
 
@@ -51,9 +45,9 @@ class ItemController extends Controller
                 // can use getFlash    
             }
             // Yii::$app->session->setFlash('success', 'Error occour in saving');            
-            return $this->render('create', ['model'=>$model, 'title'=>'Create', 'categories'=>$categories]);            
+            return $this->render('create', ['model'=>$item, 'title'=>'Create', 'categories'=>$categories]);            
         }else{
-            return $this->render('create', ['model'=>$model, 'title'=>'Create', 'categories'=>$categories]);
+            return $this->render('create', ['model'=>$item, 'title'=>'Create', 'categories'=>$categories]);
         }        
     }
 
@@ -61,17 +55,12 @@ class ItemController extends Controller
     {
         $item = Item::find()->where(['id' => $id])->one();
         $categories = Category::find()->orderBy('id')->all();
-        $arr = $item->attributes; unset($arr['id']);
-
+        
         // can get item category by using this way
         // var_dump($item->getCategory()->one()); exit;
         
-        $model = new ItemForm($arr);
-        if($model->load(Yii::$app->request->post()) && $model->validate()){            
-            $item->item_name = $model->item_name;
-            $item->item_price = $model->item_price;
-            $item->item_description = $model->item_description;  
-            $item->cat_id = $model->cat_id;  
+        if($item->load(Yii::$app->request->post()) && $item->validate()){            
+            
             // $item->attributes = $model->attributes;  // this is the whole model fills to item activerecord
             // var_dump($model->attributes); 
             // var_dump($item);
@@ -87,9 +76,9 @@ class ItemController extends Controller
                 // can use getFlash    
             }
             // Yii::$app->session->setFlash('success', 'Error occour in saving');            
-            return $this->render('create', ['model'=>$model, 'title'=>'Edit', 'categories'=>$categories]);            
+            return $this->render('create', ['model'=>$item, 'title'=>'Edit', 'categories'=>$categories]);            
         }else{
-            return $this->render('create', ['model'=>$model, 'title'=>'Edit', 'categories'=>$categories]);
+            return $this->render('create', ['model'=>$item, 'title'=>'Edit', 'categories'=>$categories]);
         }     
 
     }

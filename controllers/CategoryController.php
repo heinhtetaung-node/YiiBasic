@@ -26,12 +26,9 @@ class CategoryController extends Controller
 
     public function actionCreate()
     {
-        $model = new CategoryForm();
+        $model = new Category();
         if($model->load(Yii::$app->request->post()) && $model->validate()){            
-            //var_dump(Yii::$app->request->post()); echo "<hr>"; var_dump($model); exit;
-            $category = new Category();
-            $category->cat_name = $model->cat_name;            
-            $res = $category->save();
+            $res = $model->save();
             if($res==1){
 
                 return $this->redirect(['category/index']);
@@ -60,17 +57,14 @@ class CategoryController extends Controller
         // var_dump($items);
         // echo "</pre>";
         
-        $arr = $category->attributes; unset($arr['id']);
-        $model = new CategoryForm($arr);
-        if($model->load(Yii::$app->request->post()) && $model->validate()){            
-            $category->cat_name = $model->cat_name;
+        if($category->load(Yii::$app->request->post()) && $category->validate()){            
             $res = $category->save();
             if($res==1){
                 return $this->redirect(['category/index']);
             }            
-            return $this->render('create', ['model'=>$model, 'title'=>'Edit']);            
+            return $this->render('create', ['model'=>$category, 'title'=>'Edit']);            
         }else{
-            return $this->render('create', ['model'=>$model, 'title'=>'Edit']);
+            return $this->render('create', ['model'=>$category, 'title'=>'Edit']);
         }     
     }
 
