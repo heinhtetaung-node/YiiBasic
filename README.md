@@ -279,3 +279,17 @@ http://www.bsourcecode.com/yiiframework2/yii2-0-display-dropdownlist/
 
 Yii2 getting fields from foreign key columns
 https://stackoverflow.com/questions/44406474/how-can-i-access-both-of-tablesfields-in-leftjoin-in-yii2
+
+
+
+
+
+Need to study
+1. Gii
+2. Authentication and Session
+3. Authorization (Middleware)
+4. Url Preety
+5. Pagination
+6. Sorting 
+7. Searching
+8. Api Restful Web Services
