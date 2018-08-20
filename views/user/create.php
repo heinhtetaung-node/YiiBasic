@@ -17,7 +17,20 @@ $url = Url::to(['user/create']);
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'username') ?>
-    <?= $form->field($model, 'password')->passwordInput() ?>
+    
+
+    <?php
+    if($model->id==""){
+    	echo $form->field($model, 'password')->passwordInput();    
+    }else{    	
+    	?>
+    	<div class="form-group">
+    		<label>Password</label>
+    		<input class="form-control" type="password" value="" name="password">
+    	</div>
+    	<?php
+    }    
+    ?>
     
     <div class="form-control">
     	<?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>

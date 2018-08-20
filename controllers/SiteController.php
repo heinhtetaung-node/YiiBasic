@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\User;
 
 class SiteController extends Controller
 {
@@ -76,8 +77,14 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+        if ($model->load(Yii::$app->request->post())) {
+            $identity = User::findOne(['username' => $model->username]);
+            if($identity!=null){
+                if($identity->password == $model->password){
+                    $res = Yii::$app->user->login($identity);
+                    return $this->goBack();
+                }
+            }            
         }
 
         $model->password = '';

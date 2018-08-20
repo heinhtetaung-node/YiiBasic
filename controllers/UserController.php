@@ -28,7 +28,8 @@ class UserController extends Controller
     public function actionCreate()
     {
         $user = new User();
-        if($user->load(Yii::$app->request->post()) && $user->validate()){      
+        if($user->load(Yii::$app->request->post()) && $user->validate()){     
+            $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
             $res = $user->save();
             if($res==1){
                 return $this->redirect(['user/index']);
@@ -42,7 +43,12 @@ class UserController extends Controller
     public function actionEdit($id)
     {
         $user = User::find()->where(['id' => $id])->one();
-        if($user->load(Yii::$app->request->post()) && $user->validate()){            
+        $post = Yii::$app->request->post();        
+        if($user->load($post) && $user->validate()){
+            if($post['password']!=""){
+                $user->password = $post['password'];
+                $user->password = Yii::$app->getSecurity()->generatePasswordHash($user->password);
+            }       
             $res = $user->save();
             if($res==1){
                 return $this->redirect(['user/index']);
