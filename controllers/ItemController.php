@@ -43,16 +43,50 @@ class ItemController extends Controller
                 // can use getFlash    
             }
             // Yii::$app->session->setFlash('success', 'Error occour in saving');            
-            return $this->render('create', ['model'=>$model]);            
+            return $this->render('create', ['model'=>$model, 'title'=>'Create']);            
         }else{
-            return $this->render('create', ['model'=>$model]);
+            return $this->render('create', ['model'=>$model, 'title'=>'Create']);
         }        
     }
 
-    public function saveItem()
+    public function actionEdit($id)
     {
-        //$model = new ItemForm();
-        
+        $item = Item::find()->where(['id' => $id])->one();
+        $arr = $item->attributes; unset($arr['id']);
+        $model = new ItemForm($arr);
+        if($model->load(Yii::$app->request->post()) && $model->validate()){            
+            $item->item_name = $model->item_name;
+            $item->item_price = $model->item_price;
+            $item->item_description = $model->item_description;  
+            
+            // $item->attributes = $model->attributes;  // this is the whole model fills to item activerecord
+            // var_dump($model->attributes); 
+            // var_dump($item);
+            // exit;
+
+            $res = $item->save();
+            if($res==1){
+
+                return $this->redirect(['item/index']);
+
+                // Yii::$app->session->setFlash('success', 'the data successfully saved');
+                // can use hasFlash
+                // can use getFlash    
+            }
+            // Yii::$app->session->setFlash('success', 'Error occour in saving');            
+            return $this->render('create', ['model'=>$model, 'title'=>'Edit']);            
+        }else{
+            return $this->render('create', ['model'=>$model, 'title'=>'Edit']);
+        }     
+
     }
+
+    public function actionDelete(){
+        $post = Yii::$app->request->post();
+        $id = $post['id'];
+        $item = Item::findOne($id);
+        $item->delete();
+        return $this->redirect(['item/index']);
+    }    
 
 }

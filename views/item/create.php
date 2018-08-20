@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-$this->title = 'Create';
+$this->title = $title;
 $this->params['breadcrumbs'][] = "Item";
 $this->params['breadcrumbs'][] = $this->title;
 

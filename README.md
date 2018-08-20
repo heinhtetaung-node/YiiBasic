@@ -254,9 +254,21 @@ yii migrate
 
 
 
-Yii validation rules
+Yii2 validation rules
 https://www.yiiframework.com/wiki/56/reference-model-rules-validation#validation-rules-reference
 
-Yii return redirect
+Yii2 return redirect
 return $this->redirect(['item/index']);
 https://stackoverflow.com/questions/23893539/yii2-redirect-in-controller-action-does-not-work
+
+Yii2 activeForm go to specific route
+<?php $form = ActiveForm::begin(['action' => ['builder/saveform'],'options' => ['method' => 'post']]) ?>
+https://stackoverflow.com/questions/27958932/yii2-proper-way-of-writting-the-forms-action
+https://www.yiiframework.com/forum/index.php/topic/61954-action-attribute-in-activeformbeginaction-doesnt-work/
+
+Yii2 writing ActiveForm without model, yii2 Html hidden input
+https://stackoverflow.com/questions/32368084/activeform-without-model-yii2
+$form = ActiveForm::begin(['action' => ['item/delete'],'options' => ['method' => 'post']]);
+echo Html::hiddenInput('id', $i['id']);
+echo Html::submitButton('Delete', ['class' => 'btn btn-danger btn-sm']);
+ActiveForm::end();
