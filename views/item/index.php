@@ -17,6 +17,7 @@ $url = Url::to(['item/create']);
     <table class="table">
     	<tr>
     		<th>Id</th>
+            <th>Category</th>
     		<th>Name</th>
     		<th>Price</th>
     		<th>Description</th>
@@ -26,6 +27,7 @@ $url = Url::to(['item/create']);
         foreach($items as $i){
         	echo "<tr>";
         	echo "<td>".$i['id']."</td>";
+            echo "<td>".$i['c_name']."</td>";
         	echo "<td>".$i['item_name']."</td>";
         	echo "<td>".$i['item_price']."</td>";
         	echo "<td>".$i['item_description']."</td>";        	

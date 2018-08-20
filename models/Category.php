@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use app\models\Item;
 
 class Category extends ActiveRecord
 {
@@ -14,4 +15,8 @@ class Category extends ActiveRecord
 		return '{{category}}';
 	}
 
+	public function getItems()
+    {
+        return $this->hasMany(Item::className(), ['cat_id' => 'id']);
+    }
 }

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use app\models\Category;
 
 class Item extends ActiveRecord
 {
@@ -13,5 +14,10 @@ class Item extends ActiveRecord
 	{
 		return '{{item}}';
 	}
+
+	public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'cat_id']);
+    }
 
 }

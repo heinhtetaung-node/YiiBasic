@@ -50,6 +50,16 @@ class CategoryController extends Controller
     public function actionEdit($id)
     {
         $category = Category::find()->where(['id' => $id])->one();
+
+        // can get items of this category by using this way
+        // echo "<pre>";
+        // $items = $category->getItems()
+        //         //->where(['>', 'subtotal', 200])
+        //         ->orderBy('id')
+        //         ->all();
+        // var_dump($items);
+        // echo "</pre>";
+        
         $arr = $category->attributes; unset($arr['id']);
         $model = new CategoryForm($arr);
         if($model->load(Yii::$app->request->post()) && $model->validate()){            

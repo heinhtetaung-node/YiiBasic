@@ -272,3 +272,10 @@ $form = ActiveForm::begin(['action' => ['item/delete'],'options' => ['method' =>
 echo Html::hiddenInput('id', $i['id']);
 echo Html::submitButton('Delete', ['class' => 'btn btn-danger btn-sm']);
 ActiveForm::end();
+
+Yii2 product dropdown selectbox in form for foreign key datas
+https://stackoverflow.com/questions/21569053/how-to-make-a-drop-down-list-in-yii2
+http://www.bsourcecode.com/yiiframework2/yii2-0-display-dropdownlist/
+
+Yii2 getting fields from foreign key columns
+https://stackoverflow.com/questions/44406474/how-can-i-access-both-of-tablesfields-in-leftjoin-in-yii2
