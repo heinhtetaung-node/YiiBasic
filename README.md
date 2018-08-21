@@ -252,6 +252,8 @@ yii migrate/create create_item_table
 
 yii migrate
 
+yii migrate/fresh
+
 
 
 Yii2 validation rules
@@ -288,10 +290,11 @@ http://latcoding.com/2015/08/05/create-crud-in-yii2-without-gii/
 
 Need to study
 1. Gii
-2. Authentication and Session
-3. Authorization (Middleware)
+2. Authentication and Session (finished)
+3. Authorization (Middleware) 
 4. Url Preety
 5. Pagination
 6. Sorting 
 7. Searching
 8. Api Restful Web Services
+9. Ajax
