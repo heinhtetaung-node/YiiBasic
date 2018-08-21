@@ -255,6 +255,9 @@ yii migrate
 yii migrate/fresh
 
 
+Create role base access control
+yii migrate/create init_rbac
+
 
 Yii2 validation rules
 https://www.yiiframework.com/wiki/56/reference-model-rules-validation#validation-rules-reference
@@ -291,7 +294,7 @@ http://latcoding.com/2015/08/05/create-crud-in-yii2-without-gii/
 Need to study
 1. Gii
 2. Authentication and Session (finished)
-3. Authorization (Middleware) 
+3. Authorization (RBAC Role base access control) (finished)
 4. Url Preety
 5. Pagination
 6. Sorting 

@@ -18,6 +18,33 @@ class ItemController extends Controller
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                //'only' => ['login', 'logout', 'signup'],  if not contain only, this means all
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['@'],   // this mean all login user can access index action
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['authorRole','adminRole', 'editorRole'],   // this mean author can access index and create actions
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['edit', 'delete'],
+                        'roles' => ['adminRole', 'editorRole'],   // this mean 'adminRole', 'editorRole' can access 'create', 'edit', 'delete'
+                    ]                     
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $items = Item::find()->orderBy('item.id')

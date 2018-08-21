@@ -83,6 +83,37 @@ class SiteController extends Controller
                 $res = Yii::$app->security->validatePassword($model->password, $identity->password);
                 if($res==1){
                     $res = Yii::$app->user->login($identity);
+
+                    // adding roles
+                    $auth = Yii::$app->authManager;
+                    $id = $identity->getId();
+                    $passign = $auth->getAssignment('adminRole', $id);                          
+                    if($passign){
+                        $assignrole = $auth->getRole('adminRole');                        
+                        $auth->revoke($assignrole, $id);                        
+                    }
+                    $passign = $auth->getAssignment('editorRole', $id);                          
+                    if($passign){
+                        $assignrole = $auth->getRole('editorRole');                        
+                        $auth->revoke($assignrole, $id);                        
+                    }
+                    $passign = $auth->getAssignment('authorRole', $id);                          
+                    if($passign){
+                        $assignrole = $auth->getRole('authorRole');                        
+                        $auth->revoke($assignrole, $id);                        
+                    }
+                    
+                    if($identity->role==1){
+                        $assignrole = $auth->getRole('adminRole');                        
+                    }
+                    if($identity->role==2){
+                        $assignrole = $auth->getRole('editorRole');                        
+                    }
+                    if($identity->role==3){
+                        $assignrole = $auth->getRole('authorRole');                        
+                    }                    
+                    $auth->assign($assignrole, $id);
+                    
                     return $this->goBack();
                 }
             }            
@@ -101,6 +132,24 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
+        // $auth = Yii::$app->authManager;
+        
+        // $identity = Yii::$app->user->identity;
+        // $id = $identity->id;
+        // $role = $identity->role;
+        // if($role==1){
+        //     $roleSet = $auth->getRole('adminRole');
+        // }
+        // if($role==2){
+        //     $roleSet = $auth->getRole('editorRole');
+        // }
+        // if($role==3){
+        //     $roleSet = $auth->getRole('authorRole');
+        // }
+        // if($roleSet){
+        //     $auth->revoke($roleSet, $id);                    
+        // }        
+
         Yii::$app->user->logout();
 
         return $this->goHome();

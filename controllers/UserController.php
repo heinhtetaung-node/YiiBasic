@@ -18,6 +18,23 @@ class UserController extends Controller
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                //'only' => ['login', 'logout', 'signup'],  if not contain only, this means all
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index', 'create', 'edit', 'delete'],
+                        'roles' => ['adminRole'],   // this mean only admin can access this action
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $users = User::find()->orderBy('id')->all();

@@ -17,7 +17,8 @@ class m180820_092944_create_user_table extends Migration
             'username' => $this->string()->notNull(),
             'password' => $this->string()->notNull(),
             'auth_key' => $this->string(),            
-            'access_token' => $this->string()
+            'access_token' => $this->string(),
+            'role' => $this->smallInteger()->defaultValue(1)->comment("1 is admin(all access), 2 is editor(cannot do user), 3 is author(can only add, can edit)")
         ]);
     }
 
