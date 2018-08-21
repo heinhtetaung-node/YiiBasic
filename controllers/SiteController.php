@@ -80,7 +80,8 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $identity = User::findOne(['username' => $model->username]);
             if($identity!=null){
-                if($identity->password == $model->password){
+                $res = Yii::$app->security->validatePassword($model->password, $identity->password);
+                if($res==1){
                     $res = Yii::$app->user->login($identity);
                     return $this->goBack();
                 }

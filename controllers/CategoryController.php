@@ -18,6 +18,32 @@ class CategoryController extends Controller
     /**
      * {@inheritdoc}
      */
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                //'only' => ['login', 'logout', 'signup'],  if not contain only, this means all
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['index'],
+                        'roles' => ['?', '@'],  // means that everybody can access index
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['create', 'edit', 'delete'],
+                        'roles' => ['@'],  // means that only login user can access 'create', 'edit', 'delete'
+                    ],
+                ],
+                // this is customiziation for redirect if login user but not get access, 
+                // 'denyCallback' => function ($rule, $action) {
+                //     echo "you are not allowed"; 
+                // }
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         $categories = Category::find()->orderBy('id')->all();
