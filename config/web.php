@@ -42,15 +42,15 @@ $config = [
                 ],
             ],
         ],
-        'db' => $db,
-        /*
+        'db' => $db,        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            'enableStrictParsing' => false,
             'rules' => [
+                // ...
             ],
         ],
-        */
         'authManager' => [
             'class' => 'yii\rbac\PhpManager',
         ],
