@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\Item;
 use app\models\Category;
 use yii\helpers\Url;
+use yii\data\Pagination;
 
 class ItemController extends Controller
 {
@@ -47,19 +48,33 @@ class ItemController extends Controller
 
     public function actionIndex()
     {
-        $items = Item::find()->orderBy('item.id')
+        $items = Item::find()->orderBy([
+                                            'item.id' => SORT_DESC
+                                            // we can add other order column
+                                       ])
                              ->addSelect(['item.*', 'category.cat_name AS c_name'])
-                             ->leftJoin('category', '`item`.`cat_id` = `category`.`id`')
-                             ->asArray()
-                             ->all();
+                             ->leftJoin('category', '`item`.`cat_id` = `category`.`id`');
+                             // ->asArray()
+                             // ->all();
+
+        $count = $items->count();
+
+        $pagination = new Pagination(['totalCount' => $count]);
+        $pagination->setPageSize(2);        
         
-        return $this->render('index', ['items'=>$items]);
+        $items = $items->offset($pagination->offset)
+            ->limit($pagination->limit)
+            ->asArray()
+            ->all();                    
+        
+        return $this->render('index', ['items'=>$items, 'pagination' => $pagination]);
     }
 
     public function actionCreate()
     {
         $item = new Item();
         $categories = Category::find()->orderBy('id')->all();
+        // var_dump(Yii::$app->request->post()); exit;
         if($item->load(Yii::$app->request->post()) && $item->validate()){            
             $res = $item->save();
             if($res==1){
@@ -116,5 +131,7 @@ class ItemController extends Controller
         $item->delete();
         return $this->redirect(['item/index']);
     }    
+
+
 
 }

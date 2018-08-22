@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use yii\widgets\LinkPager;
 
 $this->title = 'Item';
 $this->params['breadcrumbs'][] = $this->title;
@@ -44,6 +45,11 @@ $url = Url::to(['item/create']);
         	echo "</tr>";
         }
         ?>
-    </table>
-    
+    </table>    
+    <?php
+    echo LinkPager::widget([
+        'pagination' => $pagination,
+    ]);
+    ?>
+        
 </div>
