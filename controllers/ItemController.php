@@ -28,7 +28,7 @@ class ItemController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['index'],
+                        'actions' => ['index', 'ajax'],
                         'roles' => ['@'],   // this mean all login user can access index action
                     ],
                     [
@@ -132,6 +132,26 @@ class ItemController extends Controller
         return $this->redirect(['item/index']);
     }    
 
-
+    public function actionAjax(){
+        $post = Yii::$app->request->post();   
+        $csrf = $post['_csrf']; 
+        unset($post['_csrf']);
+        $arr = ['_csrf' => $csrf, 'Item' => $post];
+        
+        $item = new Item();
+        if($item->load($arr)){            
+            if(!$item->validate()){
+                return $this->asJson(['result'=>false, 'message' => 'validation errors', 'errors' => $item->errors]);   
+            }
+            $res = $item->save();
+            if($res==1){
+                return $this->asJson(['result'=>true, 'data' => $item]);   
+            }else{
+                return $this->asJson(['result'=>false, 'message' => 'something wrong']);   
+            }               
+        }else{
+            return $this->asJson(['result'=>false, 'message' => 'something wrong']);   
+        }        
+    }
 
 }

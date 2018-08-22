@@ -295,9 +295,9 @@ Need to study
 1. Gii
 2. Authentication and Session (finished)
 3. Authorization (RBAC Role base access control) (finished)
-4. Url Preety
-5. Pagination
-6. Sorting 
+4. Url Preety (finished)
+5. Pagination (finished)
+6. Sorting (finished)
 7. Searching
 8. Api Restful Web Services
-9. Ajax
+9. Ajax (finished)
