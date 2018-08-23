@@ -15,6 +15,9 @@ $url = Url::to(['item/create']);
 <div class="site-about">
     <h1><?= Html::encode($this->title) ?></h1>
     <a href="<?= $url ?>"><h3>Create</h3></a>
+    <form action="">
+        <input type="text" class="form-control" name="search" value="<?= $search ?>" />
+    </form>
     <table class="table">
     	<tr>
     		<th>Id</th>

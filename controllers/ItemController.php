@@ -57,6 +57,22 @@ class ItemController extends Controller
                              // ->asArray()
                              // ->all();
 
+        $get = Yii::$app->request->queryParams; 
+        $search = "";                           
+        if(isset($get['search'])){
+            $search = $get['search'];
+
+            //using one where
+            //$items = $items->Where(['LIKE', 'item.item_name', $get['search']]);
+
+            //using or where
+            $items = $items->andFilterWhere([
+                'or',
+                ['like', 'item.item_name', $search],
+                ['like', 'category.cat_name', $search],
+            ]);
+
+        }
         $count = $items->count();
 
         $pagination = new Pagination(['totalCount' => $count]);
@@ -67,7 +83,7 @@ class ItemController extends Controller
             ->asArray()
             ->all();                    
         
-        return $this->render('index', ['items'=>$items, 'pagination' => $pagination]);
+        return $this->render('index', ['items'=>$items, 'pagination' => $pagination, 'search' => $search]);
     }
 
     public function actionCreate()
