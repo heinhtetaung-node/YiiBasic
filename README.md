@@ -292,7 +292,7 @@ http://latcoding.com/2015/08/05/create-crud-in-yii2-without-gii/
 
 
 Need to study
-1. Gii
+1. Gii (finished)
 2. Authentication and Session (finished)
 3. Authorization (RBAC Role base access control) (finished)
 4. Url Preety (finished)
