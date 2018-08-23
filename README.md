@@ -289,6 +289,15 @@ Yii create crud without GII
 http://latcoding.com/2015/08/05/create-crud-in-yii2-without-gii/
 
 
+Yii2 query using or where OrWhere whereor
+https://stackoverflow.com/questions/28592805/yii2-activequery-or-like-filter
+$items = $items->andFilterWhere([
+    'or',
+    ['like', 'item.item_name', $search],
+    ['like', 'category.cat_name', $search],
+]);
+
+
 
 
 Need to study
